@@ -19,5 +19,15 @@
     "aframe-scene",
     "webvr",
     "vr"
-  ]
+  ],
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aframevr/aframe-boilerplate.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/aframevr/aframe-boilerplate/issues"
+  },
+  "homepage": "https://github.com/aframevr/aframe-boilerplate#readme"
 }

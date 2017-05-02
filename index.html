@@ -1,18 +1,111 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script> -->
+    <script type="text/javascript" src="libs/aframe.min.js"></script>
+    <script type="text/javascript" src="libs/jquery-3.0.0.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.7.1/tachyons.min.css">
     <meta charset="utf-8">
-    <title>Hello, World! - A-Frame</title>
-    <meta name="description" content="Hello, World! - A-Frame">
-    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <title></title>
   </head>
   <body>
+
     <a-scene>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
+      <!-- <a-plane id="venice" position="0 2 -6" width="5" height="4" color="#626262"></a-plane>
+      <a-plane id="pink" position="6 2 -6" width="5" height="4" color="pink"></a-plane>
+      <a-plane id="saink" position="-6 2 -6" width="5" height="4" color="#626262"></a-plane>
+      <a-sky id="sky" src="venice.jpeg" color=""></a-sky> -->
+
+
+      <a-assets>
+        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+
+        <!-- Images. -->
+        <img id="city" src="./assets/images/city.jpg">
+        <img id="city-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
+        <img id="cubes" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg">
+        <img id="cubes-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
+        <img id="sechelt" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+        <img id="sechelt-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
+
+        <a-asset-item id="iceberg-obj" src="./assets/obj/iceberg.obj"></a-asset-item>
+        <a-asset-item id="iceberg-mtl" src="./assets/obj/iceberg.mtl"></a-asset-item>
+
+        <a-asset-item id="ocean-obj" src="./assets/obj/ocean.obj"></a-asset-item>
+        <a-asset-item id="ocean-mtl" src="./assets/obj/ocean.mtl"></a-asset-item>
+
+      </a-assets>
+      <!-- 360-degree image. -->
+      <a-sky id="image-360" radius="100" src="assets/images/sky.png"></a-sky>
+      <!-- Link we will build. -->
+      <a-entity class="link"></a-entity>
+      <!-- Camera + Cursor. -->
+      <a-camera>
+        <a-cursor id="cursor">
+          <a-animation begin="click" easing="ease-in" attribute="scale"
+                       fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
+          <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
+                       from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
+        </a-cursor>
+      </a-camera>
+
+      <a-entity class="veniceLink"
+      geometry="primitive: plane; height: 1; width: 1"
+      position="0 2 -3"
+      material="shader: flat; src: #cubes-thumb"
+      sound="on: click; src: #click-sound"></a-entity>
+
+      <a-entity id="iss"
+      rotation=""
+      geometry="primitive: sphere; radius: 90"
+      material="side: double; transparent: true; src: assets/images/iss.png"
+      ></a-entity>
+
+      <a-entity id="clouds"
+      rotation=""
+      geometry="primitive: sphere; radius: 89"
+      material="side: double; transparent: true; src: assets/images/clouds.png"
+      ></a-entity>
+
+      <a-entity class="cityLink"
+      geometry="primitive: plane; height: 1; width: 1"
+      position="1.5 2 -3"
+      material="shader: flat; src: #cubes-thumb"
+      sound="on: click; src: #click-sound"></a-entity>
+
+      <a-entity class="skyLink"
+      geometry="primitive: plane; height: 1; width: 1"
+      position="-1.5 2 -3"
+      material="shader: flat; src: #cubes-thumb"
+      sound="on: click; src: #click-sound"></a-entity>
+
+      <a-entity class="ground"
+        geometry="primitive: plane; height: 200; width: 200"
+        position="0 -2 0"
+        rotation="-90 0 0"
+        material="color: #0E2533; opacity: 0.5"></a-entity>
+
+      <a-entity obj-model="obj: #iceberg-obj"
+        position="-5 -1 -20"
+        rotation="0 90 0"
+        scale="1 2 1"
+        material="color: #e6f2ff"></a-entity>
+
     </a-scene>
+
+    <script type="text/javascript">
+      $('document').ready(function(){
+        $('.veniceLink').on('click', function() {
+          $('#image-360').attr('src', 'assets/images/venice.jpeg');
+        });
+        $('.cityLink').on('click', function() {
+          $('#image-360').attr('src', 'assets/images/city.jpg');
+        });
+        $('.skyLink').on('click', function() {
+          $('#image-360').attr('src', 'assets/images/sky.png');
+        });
+      });
+    </script>
+    <script type="text/javascript" src="iss.js"></script>
   </body>
 </html>
